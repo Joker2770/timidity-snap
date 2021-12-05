@@ -11,4 +11,4 @@ Exec=timidity-snap.gtk-ui
 Categories=AudioVideo;Audio;Sequencer;
 MimeType=audio/midi;audio/x-mod;
 Keywords=midi;sequencer
-Icon=${SNAP}/meta/gui/timidity.xpm
+Icon=${SNAP}/meta/gui/timidity.png
