@@ -144,8 +144,7 @@ parts:
       - try:
         - tcl8.6
         - tk8.6
-      - fluid-soundfont-gm
-      - fluid-soundfont-gs
+      - libfluidsynth2
       - freepats
       - libmodplug1
       - libopusfile0
