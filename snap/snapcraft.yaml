@@ -56,7 +56,6 @@ apps:
     command: usr/local/bin/timidity -ig -c $SNAP/etc/timidity/freepats.cfg
     environment:
       LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
-    extensions: [gnome-3-28]
     plugs:
       - home
       - audio-playback
