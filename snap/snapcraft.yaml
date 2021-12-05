@@ -32,6 +32,11 @@ plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
     default-provider: gtk-common-themes
 
 environment:
+  LC_ALL: C.UTF-8
+  # --- Prep GDK, GTK, Clutter ---
+  GDK_PIXBUF_BINARY_VERSION: '2.10.0' # FIXME: how to get this from installed version ?
+  GDK_BACKEND: wayland
+  CLUTTER_BACKEND: wayland
   # FIXME: loaders.cache should be created after install/refresh
   GDK_PIXBUF_MODULEDIR: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/gdk-pixbuf-2.0/${GDK_PIXBUF_BINARY_VERSION}/loaders/
   # FIXME: generate loaders.cache file ?!
@@ -147,11 +152,11 @@ parts:
       - --enable-network
     stage-packages:
       - libgtk2.0-0
+      - tcl8.6
+      - tk8.6
+      - libtcl8.6
+      - libtk8.6
       - try:
-        - tcl8.6
-        - tk8.6
-        - libtcl8.6
-        - libtk8.6
         - libfluidsynth1
         - libfluidsynth2
       - freepats
