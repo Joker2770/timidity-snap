@@ -58,7 +58,6 @@ apps:
   gtk-ui:
     command-chain: ["snap/command-chain/alsa-launch", "bin/desktop-launch"]
     command: usr/local/bin/timidity -ig -c $SNAP/etc/timidity/freepats.cfg
-    desktop: usr/share/applications/timidity-snap-gtk.desktop
     environment:
       LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
     plugs:
@@ -79,7 +78,6 @@ apps:
   tcltk-ui:
     command-chain: ["snap/command-chain/alsa-launch"]
     command: usr/local/bin/timidity -ik -c $SNAP/etc/timidity/freepats.cfg
-    desktop: usr/share/applications/timidity-snap-tcl-tk.desktop
     environment:
       LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
     plugs:
