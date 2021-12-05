@@ -17,8 +17,12 @@ confinement: strict # use 'strict' once you have the right plugs and slots
 base: core18
 license: 'GPL-2.0'
 
-plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
-  gtk-3-themes:
+plugs:
+  gtk-2-engines:
+    interface: content
+    target: $SNAP/lib/gtk-2.0
+    default-provider: gtk2-common-themes
+  gtk-2-themes:
     interface: content
     target: $SNAP/data-dir/themes
     default-provider: gtk-common-themes
@@ -46,7 +50,7 @@ environment:
 
 apps:
   gtk-ui:
-    command-chain: ["snap/command-chain/alsa-launch"]
+    command-chain: ["snap/command-chain/alsa-launch", "bin/desktop-launch"]
     command: usr/local/bin/timidity -ig -c $SNAP/etc/timidity/freepats.cfg
     environment:
       LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
@@ -135,8 +139,43 @@ parts:
       - libasound2-plugins
       - yad
 
+  # This part installs the `desktop-launch` script which initialises desktop
+  # features such as fonts, themes and the XDG environment. It also installs
+  # the GTK2 runtime libraries.
+  #
+  # It is copied straight from the snapcraft desktop helpers project. Please
+  # periodically check the source for updates and copy the changes.
+  #    https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
+  #
+  desktop-gtk2:
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: gtk
+    plugin: make
+    make-parameters: ["FLAVOR=gtk2"]
+    build-packages:
+      - build-essential
+      - libgtk2.0-dev
+    stage-packages:
+      - libxkbcommon0  # XKB_CONFIG_ROOT
+      - ttf-ubuntu-font-family
+      - dmz-cursor-theme
+      - light-themes
+      - adwaita-icon-theme
+      - gnome-themes-standard
+      - shared-mime-info
+      - libgtk2.0-0
+      - libgdk-pixbuf2.0-0
+      - libglib2.0-bin
+      - libgtk2.0-bin
+      - unity-gtk2-module
+      - locales-all
+      - libappindicator1
+      - xdg-user-dirs
+      - ibus-gtk
+      - libibus-1.0-5
+
   timidity-snap:
-    after: [alsa-mixin]
+    after: [alsa-mixin, desktop-gtk2]
     plugin: autotools
     source: "https://github.com/Joker2770/timidity-snap/raw/main/TiMidity%2B%2B-2.15.0.tar.xz"
     source-type: tar
@@ -171,4 +210,5 @@ parts:
       - libxft2
       - libxss1
       - libgdk-pixbuf2.0-0
+      - libcanberra-gtk-module
       # - timgm6mb-soundfont
