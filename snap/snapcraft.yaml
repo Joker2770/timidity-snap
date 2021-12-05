@@ -100,7 +100,7 @@ parts:
   timidity-snap:
     after: [alsa-mixin]
     plugin: autotools
-    source: "https://github.com/Joker2770/timidity-snap/TiMidity++-2.15.0.tar.xz"
+    source: "https://github.com/Joker2770/timidity-snap/raw/main/TiMidity%2B%2B-2.15.0.tar.xz"
     source-type: tar
     build-packages:
       - gcc
