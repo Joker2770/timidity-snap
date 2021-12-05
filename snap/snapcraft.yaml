@@ -14,26 +14,22 @@ description: |
 
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
-base: core20
+base: core18
 license: 'GPL-2.0'
 
-plugs:
-  gnome-3-38-2004:
-    default-provider: gnome-3-38-2004
-    interface: content
-    target: $SNAP/gnome-platform
+plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
   gtk-3-themes:
-    default-provider: gtk-common-themes
     interface: content
     target: $SNAP/data-dir/themes
-  icon-themes:
     default-provider: gtk-common-themes
+  icon-themes:
     interface: content
     target: $SNAP/data-dir/icons
-  sound-themes:
     default-provider: gtk-common-themes
+  sound-themes:
     interface: content
     target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes
 
 apps:
   gtk-ui:
@@ -41,7 +37,7 @@ apps:
     command: usr/local/bin/timidity -ig -c etc/timidity/timidity.cfg
     environment:
       LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
-    extensions: [gnome-3-38]
+    extensions: [gnome-3-28]
     plugs:
       - home
       - audio-playback
@@ -132,7 +128,7 @@ parts:
       - try:
         - tcl8.6-dev
         - tk8.6-dev
-    autotools-configure-parameters:
+    configflags:
       - --prefix=/usr/local
       - --enable-audio=oss,alsa,esd
       - --with-tcl-includes=/usr/include/tcl8.6/
@@ -144,7 +140,8 @@ parts:
       - try:
         - tcl8.6
         - tk8.6
-      - libfluidsynth2
+        - libfluidsynth1
+        - libfluidsynth2
       - freepats
       - libmodplug1
       - libopusfile0
