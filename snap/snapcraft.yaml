@@ -31,6 +31,14 @@ plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
     target: $SNAP/data-dir/sounds
     default-provider: gtk-common-themes
 
+environment:
+  # FIXME: loaders.cache should be created after install/refresh
+  GDK_PIXBUF_MODULEDIR: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/gdk-pixbuf-2.0/${GDK_PIXBUF_BINARY_VERSION}/loaders/
+  # FIXME: generate loaders.cache file ?!
+  # with: gdk-pixbuf-query-loaders > $libdir/gdk-pixbuf-2.0/$binary_version/loaders.cache
+  # GDK_PIXBUF_MODULE_FILE: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/gdk-pixbuf-2.0/${GDK_PIXBUF_BINARY_VERSION}/loaders.cache
+  GDK_PIXBUF_MODULE_FILE: ${SNAP_USER_COMMON}/gdk-pixbuf-2.0/${GDK_PIXBUF_BINARY_VERSION}/loaders.cache
+
 apps:
   gtk-ui:
     command-chain: ["snap/command-chain/alsa-launch"]
@@ -99,6 +107,8 @@ layout:
     bind: $SNAP/usr/share/alsa
   /usr/share/sounds:
     bind: $SNAP/usr/share/sounds
+  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0:
+    bind: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0
     
 parts:
   alsa-mixin:
@@ -151,4 +161,5 @@ parts:
       - libsndfile1
       - libxft2
       - libxss1
+      - libgdk-pixbuf2.0-0
       # - timgm6mb-soundfont
