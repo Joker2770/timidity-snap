@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=2.15.0
+Encoding=UTF-8
+Comment=Software sound renderer (MIDI sequencer, MOD player)
+Comment[ja]=ソフトウェア・シンセサイザ（MIDI/MODプレイヤー）
+Name=TiMidity++ MIDI sequencer
+Name[ja]=TiMidity++ MIDIシーケンサ
+Terminal=false
+Type=Application
+Exec=timidity-snap.gtk-ui
+Categories=AudioVideo;Audio;Sequencer;
+MimeType=audio/midi;audio/x-mod;
+Keywords=midi;sequencer
+Icon=${SNAP}/meta/gui/timidity.xpm

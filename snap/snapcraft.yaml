@@ -1,0 +1,121 @@
+# After registering a name on build.snapcraft.io, commit an uncommented line:
+name: timidity-snap
+version: '2.15.0' # just for humans, typically '1.2+git' or '1.3.2'
+summary: TiMidity++ is an open source MIDI to WAVE converter and player. # 79 char long summary
+description: |
+  TiMidity++ is a software synthesizer. It can play MIDI files by converting 
+  them into PCM waveform data; give it a MIDI data along with digital 
+  instrument data files, then it synthesizes them in real-time, and plays. 
+  It can not only play sounds, but also can save the generated waveforms 
+  into hard disks as various audio file formats.
+
+  TiMidity++ is a free software, distributed under the terms of 
+  GNU general public license.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+base: core18
+  
+apps:
+  gtk-ui:
+    command-chain: ["snap/command-chain/alsa-launch"]
+    command: usr/local/bin/timidity -ig -c etc/timidity/timidity.cfg
+    environment:
+      LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+    extensions: [gnome-3-28]
+    plugs:
+      - home
+      - audio-playback
+      - pulseaudio
+      - alsa
+      - desktop
+      - desktop-legacy
+      - network
+      - network-bind
+      - wayland
+      - unity7
+      - x11
+  tcltk-ui:
+    command-chain: ["snap/command-chain/alsa-launch"]
+    command: usr/local/bin/timidity -ik -c etc/timidity/timidity.cfg
+    environment:
+      LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+    plugs:
+      - home
+      - audio-playback
+      - pulseaudio
+      - alsa
+      - desktop
+      - desktop-legacy
+      - network
+      - network-bind
+      - wayland
+      - unity7
+      - x11
+  cli:
+    command-chain: ["snap/command-chain/alsa-launch"]
+    command: usr/local/bin/timidity
+    environment:
+      LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+    plugs:
+      - home
+      - audio-playback
+      - pulseaudio
+      - alsa
+      - desktop
+      - desktop-legacy
+      - network
+      - network-bind
+        
+layout:
+  /usr/share/midi/freepats:
+    bind: $SNAP/usr/share/midi/freepats
+  /etc/timidity:
+    bind: $SNAP/etc/timidity
+  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/alsa-lib:
+    bind: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/alsa-lib
+  /usr/share/alsa:
+    bind: $SNAP/usr/share/alsa
+  /usr/share/sounds:
+    bind: $SNAP/usr/share/sounds
+    
+parts:
+  alsa-mixin:
+    plugin: dump
+    source: https://github.com/diddlesnaps/snapcraft-alsa.git
+    source-subdir: snapcraft-assets
+    build-packages:
+      - libasound2-dev
+    stage-packages:
+      - libasound2
+      - libasound2-plugins
+      - yad
+
+  timidity-snap:
+    after: [alsa-mixin]
+    plugin: autotool
+    source: "https://github.com/Joker2770/timidity-snap/TiMidity++-2.15.0.tar.xz"
+    source-type: tar
+    build-packages:
+      - gcc
+      - build-essential
+      - automake
+      - make
+      - libgtk2.0-dev
+      - tcl-dev
+      - tk-dev
+    override-build: |
+      snapcraftctl build
+      ./configure --prefix=/usr/local --enable-audio=oss,alsa,esd --enable-tcltk --enable-gtk --enable-network
+      make
+      make install
+    stage-packages:
+      - libgtk2.0-0
+      - fluid-soundfont-gm
+      - fluid-soundfont-gs
+      - freepats
+      - libmodplug1
+      - libopusfile0
+      - libpulse0
+      - libsndfile1
+      # - timgm6mb-soundfont
