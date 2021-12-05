@@ -140,6 +140,8 @@ parts:
       - try:
         - tcl8.6
         - tk8.6
+        - libtcl8.6
+        - libtk8.6
         - libfluidsynth1
         - libfluidsynth2
       - freepats
@@ -147,4 +149,6 @@ parts:
       - libopusfile0
       - libpulse0
       - libsndfile1
+      - libxft2
+      - libxss1
       # - timgm6mb-soundfont
