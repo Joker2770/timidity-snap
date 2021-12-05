@@ -115,7 +115,7 @@ parts:
         - tk8.6-dev
     override-build: |
       snapcraftctl build
-      ./configure --prefix=/usr/local --enable-audio=oss,alsa,esd --enable-tcltk --enable-gtk --enable-network
+      ./configure --prefix=/usr/local --enable-audio=oss,alsa,esd --with-tcl-includes=/usr/include/tcl8.6/ --enable-tcltk --enable-gtk --enable-network
       make
       make install
     stage-packages:
