@@ -110,6 +110,9 @@ parts:
       - libgtk2.0-dev
       - tcl-dev
       - tk-dev
+      - try:
+        - tcl8.6-dev
+        - tk8.6-dev
     override-build: |
       snapcraftctl build
       ./configure --prefix=/usr/local --enable-audio=oss,alsa,esd --enable-tcltk --enable-gtk --enable-network
@@ -117,6 +120,9 @@ parts:
       make install
     stage-packages:
       - libgtk2.0-0
+      - try:
+        - tcl8.6
+        - tk8.6
       - fluid-soundfont-gm
       - fluid-soundfont-gs
       - freepats
