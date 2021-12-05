@@ -37,6 +37,8 @@ plugs:
 
 environment:
   LC_ALL: C.UTF-8
+  # Fallback to XWayland if running in a Wayland session.
+  DISABLE_WAYLAND: 1
   # --- Prep GDK, GTK, Clutter ---
   GDK_PIXBUF_BINARY_VERSION: '2.10.0' # FIXME: how to get this from installed version ?
   GDK_BACKEND: wayland
@@ -197,7 +199,6 @@ parts:
       - --enable-gtk
       - --enable-network
     stage-packages:
-      - libgtk2.0-0
       - tcl8.6
       - tk8.6
       - libtcl8.6
@@ -209,6 +210,5 @@ parts:
       - libsndfile1
       - libxft2
       - libxss1
-      - libgdk-pixbuf2.0-0
       - libcanberra-gtk-module
       # - timgm6mb-soundfont
