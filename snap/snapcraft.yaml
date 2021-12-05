@@ -113,11 +113,13 @@ parts:
       - try:
         - tcl8.6-dev
         - tk8.6-dev
-    override-build: |
-      snapcraftctl build
-      ./configure --prefix=/usr/local --enable-audio=oss,alsa,esd --with-tcl-includes=/usr/include/tcl8.6/ --enable-tcltk --enable-gtk --enable-network
-      make
-      make install
+    autotools-configure-parameters:
+      - --prefix=/usr/local
+      - --enable-audio=oss,alsa,esd
+      - --with-tcl-includes=/usr/include/tcl8.6/
+      - --enable-tcltk
+      - --enable-gtk
+      - --enable-network
     stage-packages:
       - libgtk2.0-0
       - try:
