@@ -125,6 +125,8 @@ layout:
     bind: $SNAP/usr/share/alsa
   /usr/share/sounds:
     bind: $SNAP/usr/share/sounds
+  /usr/share/tcltk:
+    bind: $SNAP/usr/share/tcltk
   /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0:
     bind: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0
   /etc/fonts:
