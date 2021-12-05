@@ -39,6 +39,10 @@ environment:
   LC_ALL: C.UTF-8
   # Fallback to XWayland if running in a Wayland session.
   DISABLE_WAYLAND: 1
+  # TCLTK_BPATH: $SNAP/usr/share/tcltk
+  # TCL_LIBRARY: $TCLTK_BPATH/tcl8.6:$TCL_LIBRARY
+  # TK_LIBRARY: $TCLTK_BPATH/tk8.6:$TK_LIBRARY
+  # TCLLIBPATH: $SNAP/usr/lib/tcltk:$SNAP/usr/lib/tcltk/${SNAPCRAFT_ARCH_TRIPLET}:$TCLLIBPATH
   # --- Prep GDK, GTK, Clutter ---
   GDK_PIXBUF_BINARY_VERSION: '2.10.0' # FIXME: how to get this from installed version ?
   GDK_BACKEND: wayland
@@ -198,6 +202,8 @@ parts:
       - --enable-gtk
       - --enable-network
     stage-packages:
+      - tk
+      - tcl
       - tcl8.6
       - tk8.6
       - libtcl8.6
