@@ -35,6 +35,8 @@ apps:
       - wayland
       - unity7
       - x11
+      - opengl
+      - removable-media
   tcltk-ui:
     command-chain: ["snap/command-chain/alsa-launch"]
     command: usr/local/bin/timidity -ik -c etc/timidity/timidity.cfg
@@ -52,6 +54,8 @@ apps:
       - wayland
       - unity7
       - x11
+      - opengl
+      - removable-media
   cli:
     command-chain: ["snap/command-chain/alsa-launch"]
     command: usr/local/bin/timidity
@@ -66,6 +70,7 @@ apps:
       - desktop-legacy
       - network
       - network-bind
+      - removable-media
         
 layout:
   /usr/share/midi/freepats:
@@ -93,7 +98,7 @@ parts:
 
   timidity-snap:
     after: [alsa-mixin]
-    plugin: autotool
+    plugin: autotools
     source: "https://github.com/Joker2770/timidity-snap/TiMidity++-2.15.0.tar.xz"
     source-type: tar
     build-packages:
