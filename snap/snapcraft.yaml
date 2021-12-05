@@ -18,22 +18,22 @@ base: core20
 license: 'GPL-2.0'
 
 plugs:
-    gtk-3-themes:
-        interface: content
-        target: $SNAP/data-dir/themes
-        default-provider: gtk-common-themes
-    icon-themes:
-            interface: content
-            target: $SNAP/data-dir/icons
-            default-provider: gtk-common-themes
-    sound-themes:
-            interface: content
-            target: $SNAP/data-dir/sounds
-            default-provider: gtk-common-themes
-    platform_snap:
-            interface: content
-            target: $SNAP/gnome-platform
-            default-provider: gnome-3-34-1804
+  gnome-3-38-2004:
+    default-provider: gnome-3-38-2004
+    interface: content
+    target: $SNAP/gnome-platform
+  gtk-3-themes:
+    default-provider: gtk-common-themes
+    interface: content
+    target: $SNAP/data-dir/themes
+  icon-themes:
+    default-provider: gtk-common-themes
+    interface: content
+    target: $SNAP/data-dir/icons
+  sound-themes:
+    default-provider: gtk-common-themes
+    interface: content
+    target: $SNAP/data-dir/sounds
 
 apps:
   gtk-ui:
@@ -41,7 +41,7 @@ apps:
     command: usr/local/bin/timidity -ig -c etc/timidity/timidity.cfg
     environment:
       LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
-    extensions: [gnome-3-34]
+    extensions: [gnome-3-38]
     plugs:
       - home
       - audio-playback
