@@ -120,6 +120,8 @@ layout:
     bind: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0
   /etc/fonts:
     bind: $SNAP/etc/fonts
+  /usr/local/lib/timidity:
+    bind: $SNAP/usr/local/lib/timidity
     
 parts:
   alsa-mixin:
