@@ -47,7 +47,7 @@ environment:
 apps:
   gtk-ui:
     command-chain: ["snap/command-chain/alsa-launch"]
-    command: usr/local/bin/timidity -ig -c etc/timidity/timidity.cfg
+    command: usr/local/bin/timidity -ig -c etc/timidity/freepats.cfg
     environment:
       LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
     extensions: [gnome-3-28]
@@ -68,7 +68,7 @@ apps:
       - gsettings
   tcltk-ui:
     command-chain: ["snap/command-chain/alsa-launch"]
-    command: usr/local/bin/timidity -ik -c etc/timidity/timidity.cfg
+    command: usr/local/bin/timidity -ik -c etc/timidity/freepats.cfg
     environment:
       LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
     plugs:
@@ -140,9 +140,8 @@ parts:
       - libgtk2.0-dev
       - tcl-dev
       - tk-dev
-      - try:
-        - tcl8.6-dev
-        - tk8.6-dev
+      - tcl8.6-dev
+      - tk8.6-dev
     configflags:
       - --prefix=/usr/local
       - --enable-audio=oss,alsa,esd
@@ -156,9 +155,6 @@ parts:
       - tk8.6
       - libtcl8.6
       - libtk8.6
-      - try:
-        - libfluidsynth1
-        - libfluidsynth2
       - freepats
       - libmodplug1
       - libopusfile0
