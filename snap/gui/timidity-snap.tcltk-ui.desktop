@@ -2,10 +2,10 @@
 Version=2.15.0
 Encoding=UTF-8
 Comment=Software sound renderer (MIDI sequencer, MOD player)
-Name=TiMidity
+Name=timidity-snap.tcltk
 Terminal=false
 Type=Application
-Exec=timidity-snap.gtk-ui
+Exec=timidity-snap.tcltk-ui
 Categories=AudioVideo;Audio;Sequencer;
 MimeType=audio/midi;audio/x-mod;
 Keywords=midi;sequencer
