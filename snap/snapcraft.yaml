@@ -95,7 +95,7 @@ apps:
       - opengl
       - removable-media
   cli:
-    command-chain: ["snap/command-chain/alsa-launch"]
+    command-chain: ["snap/command-chain/alsa-launch", "bin/desktop-launch"]
     command: usr/local/bin/timidity
     environment:
       LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
