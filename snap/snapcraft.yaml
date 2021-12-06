@@ -243,4 +243,9 @@ parts:
       - libxss1
       - libcanberra-gtk-module
       - libmotif-common
+      - libxt6
+      - libxmu6
+      - libxm4
+      - libsm6
+      - libice6
       # - timgm6mb-soundfont
