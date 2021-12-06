@@ -202,7 +202,7 @@ parts:
       - libjack-dev
     configflags:
       - --prefix=/usr/local
-      - --enable-audio=oss,alsa,esd,jack
+      - --enable-audio=oss,alsa,jack
       - --with-tcl-includes=/usr/include/tcl8.6/
       - --enable-tcltk
       - --enable-gtk
@@ -220,5 +220,4 @@ parts:
       - libxft2
       - libxss1
       - libcanberra-gtk-module
-      - jackd1
       # - timgm6mb-soundfont
