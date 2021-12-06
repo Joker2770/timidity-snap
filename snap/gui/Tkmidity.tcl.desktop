@@ -2,7 +2,7 @@
 Version=2.15.0
 Encoding=UTF-8
 Comment=Software sound renderer (MIDI sequencer, MOD player)
-Name=timidity-snap-tcl-tk
+Name=Tkmidity.tcl
 Terminal=false
 Type=Application
 Exec=timidity-snap.tcltk-ui
