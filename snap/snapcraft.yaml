@@ -150,6 +150,8 @@ layout:
     bind: $SNAP/usr/share/sounds
   /usr/share/tcltk:
     bind: $SNAP/usr/share/tcltk
+  /usr/share/locale:
+    bind: $SNAP/usr/share/locale
   /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0:
     bind: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0
   /etc/fonts:
