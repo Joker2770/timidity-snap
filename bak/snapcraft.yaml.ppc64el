@@ -1,0 +1,260 @@
+# After registering a name on build.snapcraft.io, commit an uncommented line:
+name: timidity-snap
+version: '2.15.0' # just for humans, typically '1.2+git' or '1.3.2'
+summary: TiMidity++ is an open source MIDI to WAVE converter and player. # 79 char long summary
+description: |
+  TiMidity++ is a software synthesizer. It can play MIDI files by converting 
+  them into PCM waveform data; give it a MIDI data along with digital 
+  instrument data files, then it synthesizes them in real-time, and plays. 
+  It can not only play sounds, but also can save the generated waveforms 
+  into hard disks as various audio file formats.
+
+  TiMidity++ is a free software, distributed under the terms of 
+  GNU general public license.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+base: core18
+license: 'GPL-2.0'
+architectures:
+  - build-on: ppc64el
+
+plugs:
+  gtk-2-engines:
+    interface: content
+    target: $SNAP/lib/gtk-2.0
+    default-provider: gtk2-common-themes
+  gtk-2-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes
+
+environment:
+  LC_ALL: C.UTF-8
+  # Fallback to XWayland if running in a Wayland session.
+  DISABLE_WAYLAND: 1
+  # TCLTK_BPATH: $SNAP/usr/share/tcltk
+  # TCL_LIBRARY: $TCLTK_BPATH/tcl8.6:$TCL_LIBRARY
+  # TK_LIBRARY: $TCLTK_BPATH/tk8.6:$TK_LIBRARY
+  # TCLLIBPATH: $SNAP/usr/lib/tcltk:$SNAP/usr/lib/tcltk/${SNAPCRAFT_ARCH_TRIPLET}:$TCLLIBPATH
+  # --- Prep GDK, GTK, Clutter ---
+  GDK_PIXBUF_BINARY_VERSION: '2.10.0' # FIXME: how to get this from installed version ?
+  GDK_BACKEND: wayland
+  CLUTTER_BACKEND: wayland
+  # FIXME: loaders.cache should be created after install/refresh
+  GDK_PIXBUF_MODULEDIR: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/gdk-pixbuf-2.0/${GDK_PIXBUF_BINARY_VERSION}/loaders/
+  # FIXME: generate loaders.cache file ?!
+  # with: gdk-pixbuf-query-loaders > $libdir/gdk-pixbuf-2.0/$binary_version/loaders.cache
+  # GDK_PIXBUF_MODULE_FILE: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/gdk-pixbuf-2.0/${GDK_PIXBUF_BINARY_VERSION}/loaders.cache
+  GDK_PIXBUF_MODULE_FILE: ${SNAP_USER_COMMON}/gdk-pixbuf-2.0/${GDK_PIXBUF_BINARY_VERSION}/loaders.cache
+
+apps:
+  gtk-ui:
+    command-chain: ["snap/command-chain/alsa-launch", "bin/desktop-launch"]
+    command: usr/local/bin/timidity -ig -c $SNAP/etc/timidity/freepats.cfg
+    environment:
+      LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+    plugs:
+      - home
+      - audio-playback
+      - pulseaudio
+      - alsa
+      - jack1
+      - desktop
+      - desktop-legacy
+      - network
+      - network-bind
+      - wayland
+      - unity7
+      - x11
+      - opengl
+      - removable-media
+      - gsettings
+  tcltk-ui:
+    command-chain: ["snap/command-chain/alsa-launch"]
+    command: usr/local/bin/timidity -ik -c $SNAP/etc/timidity/freepats.cfg
+    environment:
+      LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+    plugs:
+      - home
+      - audio-playback
+      - pulseaudio
+      - alsa
+      - jack1
+      - desktop
+      - desktop-legacy
+      - network
+      - network-bind
+      - wayland
+      - unity7
+      - x11
+      - opengl
+      - removable-media
+  motif-ui:
+    command-chain: ["snap/command-chain/alsa-launch"]
+    command: usr/local/bin/timidity -im -c $SNAP/etc/timidity/freepats.cfg
+    environment:
+      LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+    plugs:
+      - home
+      - audio-playback
+      - pulseaudio
+      - alsa
+      - jack1
+      - desktop
+      - desktop-legacy
+      - network
+      - network-bind
+      - wayland
+      - unity7
+      - x11
+      - opengl
+      - removable-media
+  cli:
+    command-chain: ["snap/command-chain/alsa-launch", "bin/desktop-launch"]
+    command: usr/local/bin/timidity
+    environment:
+      LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+    plugs:
+      - home
+      - audio-playback
+      - pulseaudio
+      - alsa
+      - jack1
+      - desktop
+      - desktop-legacy
+      - network
+      - network-bind
+      - wayland
+      - unity7
+      - x11
+      - opengl
+      - removable-media
+        
+layout:
+  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/alsa-lib:
+    bind: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/alsa-lib
+  # /usr/share/midi/freepats:
+    # bind: $SNAP/usr/share/midi/freepats
+  # /usr/share/alsa:
+    # bind: $SNAP/usr/share/alsa
+  # /usr/share/sounds:
+    # bind: $SNAP/usr/share/sounds
+  # /usr/share/tcltk:
+    # bind: $SNAP/usr/share/tcltk
+  /usr/share:
+    bind: $SNAP/usr/share
+  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0:
+    bind: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0
+  # /etc/fonts:
+    # bind: $SNAP/etc/fonts
+  # /etc/X11:
+    # bind: $SNAP/etc/X11
+  # /etc/timidity:
+    # bind: $SNAP/etc/timidity
+  /etc:
+    bind: $SNAP/etc
+  /usr/local/lib/timidity:
+    bind: $SNAP/usr/local/lib/timidity
+    
+parts:
+  alsa-mixin:
+    plugin: dump
+    source: https://github.com/diddlesnaps/snapcraft-alsa.git
+    source-subdir: snapcraft-assets
+    build-packages:
+      - libasound2-dev
+    stage-packages:
+      - libasound2
+      - libasound2-plugins
+      - yad
+
+  # This part installs the `desktop-launch` script which initialises desktop
+  # features such as fonts, themes and the XDG environment. It also installs
+  # the GTK2 runtime libraries.
+  #
+  # It is copied straight from the snapcraft desktop helpers project. Please
+  # periodically check the source for updates and copy the changes.
+  #    https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
+  #
+  desktop-gtk2:
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: gtk
+    plugin: make
+    make-parameters: ["FLAVOR=gtk2"]
+    build-packages:
+      - build-essential
+      - libgtk2.0-dev
+    stage-packages:
+      - libxkbcommon0  # XKB_CONFIG_ROOT
+      - ttf-ubuntu-font-family
+      - dmz-cursor-theme
+      - light-themes
+      - adwaita-icon-theme
+      - gnome-themes-standard
+      - shared-mime-info
+      - libgtk2.0-0
+      - libgdk-pixbuf2.0-0
+      - libglib2.0-bin
+      - libgtk2.0-bin
+      - unity-gtk2-module
+      - locales-all
+      - libappindicator1
+      - xdg-user-dirs
+      - ibus-gtk
+      - libibus-1.0-5
+
+  timidity-snap:
+    after: [alsa-mixin, desktop-gtk2]
+    plugin: autotools
+    source: "https://github.com/Joker2770/timidity-snap/raw/main/TiMidity%2B%2B-2.15.0.tar.xz"
+    source-type: tar
+    build-packages:
+      - gcc
+      - build-essential
+      - automake
+      - make
+      - libgtk2.0-dev
+      - tcl-dev
+      - tk-dev
+      - tcl8.6-dev
+      - tk8.6-dev
+      - libjack-dev
+      - libmotif-dev
+    configflags:
+      - --build=powerpc64le-unknown-linux-gnu
+      - --prefix=/usr/local
+      - --enable-audio=oss,alsa,jack
+      - --with-tcl-includes=/usr/include/tcl8.6/
+      - --enable-tcltk
+      - --enable-gtk
+      - --enable-motif
+      - --enable-network
+    stage-packages:
+      - tcl8.6
+      - tk8.6
+      - libtcl8.6
+      - libtk8.6
+      - freepats
+      - libmodplug1
+      - libopusfile0
+      - libpulse0
+      - libsndfile1
+      - libxft2
+      - libxss1
+      - libcanberra-gtk-module
+      - libmotif-common
+      - libxt6
+      - libxmu6
+      - libxm4
+      - libsm6
+      - libice6
+      # - timgm6mb-soundfont
