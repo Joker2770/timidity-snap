@@ -238,6 +238,7 @@ parts:
       - --enable-gtk
       - --enable-motif
       - --enable-network
+      - --with-default-path=/etc/timidity/
     stage-packages:
       - tcl8.6
       - tk8.6
