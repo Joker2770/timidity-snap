@@ -138,8 +138,6 @@ apps:
       - removable-media
         
 layout:
-  /etc/timidity:
-    bind: $SNAP/etc/timidity
   /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/alsa-lib:
     bind: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/alsa-lib
   # /usr/share/midi/freepats:
@@ -154,8 +152,14 @@ layout:
     bind: $SNAP/usr/share
   /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0:
     bind: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0
-  /etc/fonts:
-    bind: $SNAP/etc/fonts
+  # /etc/fonts:
+    # bind: $SNAP/etc/fonts
+  # /etc/X11:
+    # bind: $SNAP/etc/X11
+  # /etc/timidity:
+    # bind: $SNAP/etc/timidity
+  /etc:
+    bind: $SNAP/etc
   /usr/local/lib/timidity:
     bind: $SNAP/usr/local/lib/timidity
     
