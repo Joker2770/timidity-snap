@@ -228,6 +228,10 @@ parts:
       - libjack-dev
       - libmotif-dev
     configflags:
+      - on arm64:
+        - --build=aarch64-unknown-linux-gnu
+      - on ppc64el:
+        - --build=powerpc64le-unknown-linux-gnu
       - --prefix=/usr/local
       - --enable-audio=oss,alsa,jack
       - --with-tcl-includes=/usr/include/tcl8.6/
