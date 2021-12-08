@@ -142,16 +142,34 @@ apps:
 layout:
   /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/alsa-lib:
     bind: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/alsa-lib
-  /usr/share/midi/freepats:
-    bind: $SNAP/usr/share/midi/freepats
-  /usr/share/alsa:
-    bind: $SNAP/usr/share/alsa
-  /usr/share/sounds:
-    bind: $SNAP/usr/share/sounds
-  /usr/share/tcltk:
-    bind: $SNAP/usr/share/tcltk
-  # /usr/share:
-    # bind: $SNAP/usr/share
+  # /usr/share/midi/freepats:
+    # bind: $SNAP/usr/share/midi/freepats
+  # /usr/share/alsa:
+    # bind: $SNAP/usr/share/alsa
+  # /usr/share/sounds:
+    # bind: $SNAP/usr/share/sounds
+  # /usr/share/tcltk:
+    # bind: $SNAP/usr/share/tcltk
+  # /usr/share/X11:
+    # bind: $SNAP/usr/share/X11
+  # /usr/share/fonts:
+    # bind: $SNAP/usr/share/fonts
+  # /usr/share/glib-2.0:
+    # bind: $SNAP/usr/share/glib-2.0
+  # /usr/share/icons:
+    # bind: $SNAP/usr/share/icons
+  # /usr/share/themes:
+    # bind: $SNAP/usr/share/themes
+  # /usr/share/menu:
+    # bind: $SNAP/usr/share/menu
+  # /usr/share/locale:
+    # bind: $SNAP/usr/share/locale
+  # /usr/share/GConf:
+    # bind: $SNAP/usr/share/GConf
+  # /usr/share/applications:
+    # bind: $SNAP/usr/share/applications
+  /usr/share:
+    bind: $SNAP/usr/share
   /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0:
     bind: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0
   /etc/fonts:
