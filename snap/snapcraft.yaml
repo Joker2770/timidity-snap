@@ -44,16 +44,6 @@ environment:
   LC_ALL: C.UTF-8
   # Fallback to XWayland if running in a Wayland session.
   DISABLE_WAYLAND: 1
-  # --- Prep GDK, GTK, Clutter ---
-  GDK_PIXBUF_BINARY_VERSION: '2.10.0' # FIXME: how to get this from installed version ?
-  # GDK_BACKEND: wayland
-  # CLUTTER_BACKEND: wayland
-  # FIXME: loaders.cache should be created after install/refresh
-  GDK_PIXBUF_MODULEDIR: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/gdk-pixbuf-2.0/${GDK_PIXBUF_BINARY_VERSION}/loaders/
-  # FIXME: generate loaders.cache file ?!
-  # with: gdk-pixbuf-query-loaders > $libdir/gdk-pixbuf-2.0/$binary_version/loaders.cache
-  # GDK_PIXBUF_MODULE_FILE: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/gdk-pixbuf-2.0/${GDK_PIXBUF_BINARY_VERSION}/loaders.cache
-  GDK_PIXBUF_MODULE_FILE: ${SNAP_USER_COMMON}/gdk-pixbuf-2.0/${GDK_PIXBUF_BINARY_VERSION}/loaders.cache
 
 apps:
   gtk-ui:
