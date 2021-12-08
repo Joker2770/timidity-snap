@@ -17,7 +17,10 @@ confinement: strict # use 'strict' once you have the right plugs and slots
 base: core18
 license: 'GPL-2.0'
 architectures:
-  - build-on: ppc64el
+  - build-on: i386
+  - build-on: amd64
+  - build-on: armhf
+  - build-on: s390x
 
 plugs:
   gtk-2-engines:
@@ -230,7 +233,6 @@ parts:
       - libjack-dev
       - libmotif-dev
     configflags:
-      - --build=powerpc64le-unknown-linux-gnu
       - --prefix=/usr/local
       - --enable-audio=oss,alsa,jack
       - --with-tcl-includes=/usr/include/tcl8.6/
