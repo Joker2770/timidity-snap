@@ -28,6 +28,10 @@ plugs:
     interface: content
     target: $SNAP/data-dir/themes
     default-provider: gtk-common-themes
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes
   icon-themes:
     interface: content
     target: $SNAP/data-dir/icons
@@ -69,6 +73,7 @@ apps:
     command: usr/local/bin/timidity -ik -c $SNAP/etc/timidity/freepats.cfg
     environment:
       LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+    extensions: [gnome-3-28]
     plugs:
       - home
       - audio-playback
@@ -84,11 +89,13 @@ apps:
       - x11
       - opengl
       - removable-media
+      - gsettings
   motif-ui:
     command-chain: ["snap/command-chain/alsa-launch"]
     command: usr/local/bin/timidity -im -c $SNAP/etc/timidity/freepats.cfg
     environment:
       LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+    extensions: [gnome-3-28]
     plugs:
       - home
       - audio-playback
@@ -104,6 +111,7 @@ apps:
       - x11
       - opengl
       - removable-media
+      - gsettings
   cli:
     command-chain: ["snap/command-chain/alsa-launch", "bin/desktop-launch"]
     command: usr/local/bin/timidity
@@ -124,6 +132,7 @@ apps:
       - x11
       - opengl
       - removable-media
+      - gsettings
         
 layout:
   /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/alsa-lib:
