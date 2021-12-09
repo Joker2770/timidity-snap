@@ -42,16 +42,14 @@ plugs:
     default-provider: gtk-common-themes
 
 environment:
-  LC_ALL: C.UTF-8
   # Fallback to XWayland if running in a Wayland session.
   DISABLE_WAYLAND: 1
+  LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
 
 apps:
   gtk-ui:
     command-chain: ["snap/command-chain/alsa-launch", "bin/desktop-launch"]
     command: usr/local/bin/timidity -ig -c $SNAP/etc/timidity/freepats.cfg
-    environment:
-      LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
     plugs:
       - home
       - audio-playback
@@ -71,8 +69,6 @@ apps:
   tcltk-ui:
     command-chain: ["snap/command-chain/alsa-launch"]
     command: usr/local/bin/timidity -ik -c $SNAP/etc/timidity/freepats.cfg
-    environment:
-      LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
     extensions: [gnome-3-28]
     plugs:
       - home
@@ -93,8 +89,6 @@ apps:
   motif-ui:
     command-chain: ["snap/command-chain/alsa-launch"]
     command: usr/local/bin/timidity -im -c $SNAP/etc/timidity/freepats.cfg
-    environment:
-      LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
     extensions: [gnome-3-28]
     plugs:
       - home
@@ -115,8 +109,6 @@ apps:
   cli:
     command-chain: ["snap/command-chain/alsa-launch", "bin/desktop-launch"]
     command: usr/local/bin/timidity
-    environment:
-      LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
     plugs:
       - home
       - audio-playback
