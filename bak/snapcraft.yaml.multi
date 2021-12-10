@@ -23,14 +23,11 @@ architectures:
   - build-on: s390x
 
 plugs:
-  gtk-2-engines:
-    interface: content
-    target: $SNAP/lib/gtk-2.0
-    default-provider: gtk2-common-themes
-  gtk-2-themes:
-    interface: content
-    target: $SNAP/data-dir/themes
-    default-provider: gtk-common-themes
+  ## DISABLED (1 of 4) because gtk2-common-themes only available on amd64
+  # gtk-2-engines:
+  #   interface: content
+  #   target: $SNAP/lib/gtk-2.0
+  #   default-provider: gtk2-common-themes
   gtk-3-themes:
     interface: content
     target: $SNAP/data-dir/themes
