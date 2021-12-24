@@ -17,7 +17,7 @@ confinement: strict # use 'strict' once you have the right plugs and slots
 base: core18
 license: 'GPL-2.0'
 architectures:
-  - build-on: ppc64el
+  - build-on: arm64
 
 plugs:
   ## DISABLED (1 of 4) because gtk2-common-themes only available on amd64
@@ -253,7 +253,7 @@ parts:
       - libjack-dev
       - libmotif-dev
     configflags:
-      - --build=powerpc64le-unknown-linux-gnu
+      - --build=aarch64-unknown-linux-gnu
       - --prefix=/usr/local
       - --enable-audio=oss,alsa,jack
       - --with-tcl-includes=/usr/include/tcl8.6/
