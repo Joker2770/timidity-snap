@@ -263,6 +263,9 @@ parts:
       - --enable-gtk
       - --enable-motif
       - --enable-network
+      - --enable-server
+      - --enable-alsaseq
+      - --enable-spectrogram
       - --with-default-path=/etc/timidity
     stage-packages:
       - tcl8.6
