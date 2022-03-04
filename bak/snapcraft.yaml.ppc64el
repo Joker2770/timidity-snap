@@ -35,6 +35,15 @@ description: |
   TiMidity++ is a free software, distributed under the terms of 
   GNU general public license.
 
+  example of converter:
+  `timidity-snap.cli input.mid -Ow -o out.wav -c $SNAP/etc/timidity/freepats.cfg`
+
+  more usages:
+  `timidity-snap.cli -h`
+
+  build details:
+  https://github.com/Joker2770/timidity-snap
+
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
 base: core18

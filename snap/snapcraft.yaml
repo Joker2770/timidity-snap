@@ -35,15 +35,21 @@ description: |
   TiMidity++ is a free software, distributed under the terms of 
   GNU general public license.
 
+  example of converter:
+  `timidity-snap.cli input.mid -Ow -o out.wav -c $SNAP/etc/timidity/freepats.cfg`
+
+  more usages:
+  `timidity-snap.cli -h`
+
+  build details:
+  https://github.com/Joker2770/timidity-snap
+
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
 base: core18
 license: 'GPL-2.0+'
 architectures:
-  - build-on: i386
-  - build-on: amd64
-  - build-on: armhf
-  - build-on: s390x
+  - build-on: ppc64el
 
 plugs:
   ## DISABLED (1 of 4) because gtk2-common-themes only available on amd64
@@ -279,6 +285,7 @@ parts:
       - libjack-dev
       - libmotif-dev
     configflags:
+      - --build=powerpc64le-unknown-linux-gnu
       - --prefix=/usr/local
       - --enable-audio=oss,alsa,jack
       - --with-tcl-includes=/usr/include/tcl8.6/
