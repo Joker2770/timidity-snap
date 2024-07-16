@@ -1,6 +1,6 @@
 #
 #    This is snapcraft build script.
-#    Copyright (C) 2021-2022 Jintao Yang <yjt950840@outlook.com>
+#    Copyright (C) 2021-2024 Jintao Yang <yjt950840@outlook.com>
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -273,8 +273,9 @@ parts:
   timidity-snap:
     after: [alsa-mixin, desktop-gtk2]
     plugin: autotools
-    source: "https://github.com/Joker2770/timidity-snap/raw/main/TiMidity%2B%2B-2.15.0.tar.xz"
-    source-type: tar
+    source: "https://git.code.sf.net/p/timidity/git"
+    source-type: git
+    source-branch: master
     build-packages:
       - gcc
       - build-essential
